@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Time Management</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="stylesheets/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="stylesheets/sidebar.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="#">
+                        Time Management
+                    </a>
+                </li>
+                <li>
+                    <a href="/todo/<%= user._id %>">Todo List</a>
+                </li>
+                <li>
+                    <a href="#">Exam Prep</a>
+                </li>
+                <li>
+                    <a href="#">Profile</a>
+                </li>
+                <li>
+                    <a href="#">Group Discussions</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle"><i class="fas fa-align-justify"></i></a>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+      <div class="container container-table">
+        <div class="row vertical-center-row" style="margin-top:20px;">
+          <div class="col-md-1"></div><br>
+          <div class="text-center col-md-10">
+            <h3><%= user.faculty %>, Sem-<%= user.sem %></h3>
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Subject Name</th>
+                  <th scope="col">Chapters</th>
+                  <th scope="col">% Covered</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% user.subjects.forEach(function(subject,i){ %>
+                  <tr>
+                    <td><%= ++i %></td>
+                    <td><%= subject.subjectName %></td>
+                    <td>
+                      <table class="table table-striped">
+                        <thead>
+                          <tr>
+                            <td>Name</td>
+                            <td>Hours</td>
+                            <td>Marks</td>
+                            <td>Studied?</td>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <% user.chapters.forEach(function(chapter,i){
+                            if(chapter.subjectCode == subject.subjectCode){ %>
+                              <tr>
+                                <td><%= chapter.chapterName %></td>
+                                <td><%= chapter.hours %></td>
+                                <td><%= chapter.marks %></td>
+                                <td>
+                                  <input type="checkbox" id="myCheck" name="Studied" onclick="myFunction()">
+                                </td>
+                            </tr>
+                            <%} }) %>
+
+                        </tbody>
+                      </table>
+                    </td>
+                    
+                    
+                    <td><p id="percover" name="per"></p></td>
+                
+                      
+                  </tr>
+                <% }) %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="javascripts/jquery.min.js"></script>
+    <script src="javascripts/bootstrap.bundle.min.js"></script>
+
+    <!-- Menu Toggle Script -->
+    <script>
+
+      function myFunction() {
+  
+      var checkBox = document.getElementById("myCheck");
+  
+      var x=($("input:checkbox:checked").length);
+      var n=($("input:checkbox").length);
+      var per =((x/n)*100);
+      console.log(per);
+      document.getElementById("percover").innerHTML= per;
+}
+
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+    </script>
+
+</body>
+
+</html>

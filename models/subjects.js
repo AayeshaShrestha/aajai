@@ -5,7 +5,11 @@ const SubjectSchema = mongoose.Schema({
   subjectCode : String,
   sem : Number,
   faculty : String,
-  numOfChapters : Number
+  numOfChapters : Number,
+  total : {
+      type : Number,
+      default : 0
+    }
 });
 
 module.exports = mongoose.model('Subjects', SubjectSchema);

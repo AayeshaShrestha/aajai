@@ -9,19 +9,25 @@ const UsersSchema = mongoose.Schema({
   subjects : [{
     subjectName : String,
     subjectCode : String,
-    percent : Number
+    total : Number
+  }],
+  percent : [{
+    chPercent : Number
   }],
   chapters : [{
     chapterName : String,
     subjectCode : String,
     hours : Number,
     marks : Number,
-    checked : Boolean
+    checked : {
+        type : Boolean,
+        default : 0
+      }
   }],
   todo : [{
     lists : String
   }],
-  deadline : Date
+  deadline : Date,
 });
 
 module.exports = mongoose.model('Users', UsersSchema);

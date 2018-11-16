@@ -9,7 +9,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var app = express();
-mongoose.connect('mongodb://localhost/timeManagement');
+mongoose.connect('mongodb://localhost/aajai');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
